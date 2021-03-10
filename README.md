@@ -39,9 +39,47 @@ and input `python -m ipykernel install --user --name final_project_510 --display
 
 (final_pro_510 should be the name of the virtual environment and press Kernel above the page and change the kernel.)
 
-## 4. The following is a picture show the structure of the files in this project：
+# The following is a picture show the structure of the files in this project：
 orange blocks are scripts
 
 blue blocks are data files
 ![title](src/Project_description.png)
 
+# What did I set out to study?
+
+Because cloudflare has just upgraded anti-crawler mechanism at October. It is hard to get data from SteamDB (a website with game history data. I have to use reviews in steam to label the games in steam. 
+
+#	What did I Discover?
+This project generate a model to predict the popularity of a game by using early data during game released. This model is able to classify the review of a game into 3 class: Good, Fair or Bad with a 80% accuracy. 
+An accuracy of 80% for a 3-classification problems is not a low score. A model like this assist developers to decide if the game should increase investment, for example, advertisement or new DLCs to improve game quality.
+
+You can try `python TUO_SUN_proj2.py --source=local` to get the accuracy
+
+or try `python Tuo_SUN_proj2.py --source=remote` to try the whole project. However, this need many hours to process
+
+The goal of the project is to get reviews data from IGN and PCgamer, get game-tag data from steam store, and use these data to predict the popularity of the game. We will use the dataframe below to predict the review score from steam
+
+# What difficulties did I have in completing the project?  
+
+### Dynamic web page
+IGN is a game information website with a dynamic web page. I have to simulate page turning by using `selenium` to crawl to html for 2000 games in IGN
+
+### Bad name matching
+For a same game, its name in IGN may be different from its name in PCgamer. Even if they are the same, they two may be different from that in steam appid list. For example, 'Sid Meier's Civilization VI' is a game named in steam, but in PCgamer it is named 'Civilization 6'. I have to write an agent to recognize similar names in these three game name lists and minimize Type I and Type II errors.
+
+### Algorithm need a lot of computation:
+After designing the recognization agents, it takes me a long time to get create `similar_relation.csv`, `similar_relation_pc.csv`. I try to use multiprocessing to handle this problems.
+
+# What skills did I wish I had while I were doing the project?
+The better ability to design and complete a little bit large project. Actually, this project have more than 3000 lines of code (including comments). It is the biggest python project that I have ever tried.
+
+# What would I do “next” to expand or augment the project?    
+
+### Better agent:
+To be honest, the agents I set to recognize similar names is far from high efficiency. It compares names one by one. There must be better agent for these problems, for example, clustering, or generate a recognization model from a bigger dataset.
+
+### More website:
+There are more game information websites. Review scores from them may increase the accuracy of the model.
+
+### More varied features:
+This model uses review scores and game tags of a game, but I think more kind of features should be involved, for example, the price of the game or the publisher of the game
