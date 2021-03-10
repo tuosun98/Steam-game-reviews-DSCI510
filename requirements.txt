@@ -1,0 +1,7 @@
+pandas
+numpy
+nltk
+requests
+sklearn
+selenium
+Beautifulsoup4 
